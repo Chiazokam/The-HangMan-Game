@@ -178,6 +178,10 @@ def user_input_requirements():
             print("You can only put in an alphabet")
             
             warning += 1
+            
+        elif users_guess == "":
+            
+            print("You must guess an alphabet")
            
         else:
             return users_guess
@@ -190,7 +194,7 @@ def guess_non_repeat(users_guess, letters_guessed):
     
     if users_guess in letters_guessed:
         
-        letters_guessed.remove(users_guess)
+        #letters_guessed.remove(users_guess)
         
         print("You have made this guess already!")
         
@@ -202,6 +206,21 @@ def count_unique_letters(secret_word):
      
     return len(set(secret_word))
 
+#==============================================================================
+#FUNCTION TO REDUCE GUESSING CHANCES IF WRONG GUESS IS A VOWEL OR CONSONANT          
+#==============================================================================
+
+def reduce_guess(users_guess, num_of_guesses_left):
+    
+    if users_guess in "aeiou":
+        
+        num_of_guesses_left -= 2
+        
+    else:
+        
+        num_of_guesses_left -= 1
+        
+    return num_of_guesses_left
 #==============================================================================
     
 def hangman(secret_word):
@@ -300,7 +319,7 @@ def hangman(secret_word):
             
             print(letters_guessed)
             
-            num_of_guesses_left -= 1
+            num_of_guesses_left = reduce_guess(users_guess, num_of_guesses_left)
             
             print("Available Letters:", get_available_letters(letters_guessed))
             
@@ -309,6 +328,7 @@ def hangman(secret_word):
             print("Oops! That letter is not in my word:", get_guessed_word(secret_word, letters_guessed ) )
             
             print("__________________________________________")
+            
             
             if num_of_guesses_left == 0:
                 
