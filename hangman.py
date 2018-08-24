@@ -323,14 +323,19 @@ def hangman(secret_word):
             
             print("Available Letters:", get_available_letters(letters_guessed))
             
-            print("You have", str(num_of_guesses_left), "guess(es) left")
+            #print("You have", str(num_of_guesses_left), "guess(es) left")
             
             print("Oops! That letter is not in my word:", get_guessed_word(secret_word, letters_guessed ) )
             
             print("__________________________________________")
             
+            #To stop the printing of '-1 guess(es)' when vowel guess 
+            #reduction takes num_of_guesses_left to below 0
+            if num_of_guesses_left != -1:
+                
+                print("You have", str(num_of_guesses_left), "guess(es) left")
             
-            if num_of_guesses_left == 0:
+            if num_of_guesses_left <= 0:
                 
                 print("                                          ")
                 
