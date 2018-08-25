@@ -165,11 +165,11 @@ def get_available_letters(letters_guessed):
     
 def user_input_requirements():
 
-    warning = 0
+    warning = 3
     
     users_guess_history = []
     
-    while warning < 3:
+    while warning >= 0:
         
         users_guess = input("Make a guess. Put in a letter: ").lower()
         
@@ -177,26 +177,37 @@ def user_input_requirements():
             
             print("You can only put in an alphabet")
             
-            warning += 1
+            print("You have just lost a warning")
+           
+            warning -= 1
             
         elif users_guess == "":
             
             print("You must guess an alphabet")
+            
+            print("You have just lost a warning")
+            
+            warning -= 1
+            
+            
            
         else:
-            return users_guess
+        
+            return (users_guess, warning)
 
-#==============================================================================
-#FUNCTION TO STOP USER FROM REPEATING GUESSES            
-#==============================================================================
-            
-def guess_non_repeat(users_guess, letters_guessed):
-    
-    if users_guess in letters_guessed:
-        
-        #letters_guessed.remove(users_guess)
-        
-        print("You have made this guess already!")
+# =============================================================================
+# #==============================================================================
+# #FUNCTION TO STOP USER FROM REPEATING GUESSES            
+# #==============================================================================
+#             
+# def guess_non_repeat(users_guess, letters_guessed):
+#     
+#     if users_guess in letters_guessed:
+#         
+#         #letters_guessed.remove(users_guess)
+#         
+#         print("You have made this guess already!")
+# =============================================================================
         
 #==============================================================================
 #FUNCTION TO RETURN THE COUNT OF UNIQUE LETTERS IN THE SECRET WORD          
@@ -206,10 +217,22 @@ def count_unique_letters(secret_word):
      
     return len(set(secret_word))
 
+# =============================================================================
+# #==============================================================================
+# #FUNCTION TO REDUCE number          
+# #==============================================================================
+# 
+# def guess_reduction(n, num_of_guesses_left):
+#     
+#     num_of_guesses_left -= n
+#     
+#     return num_of_guesses_left
+# =============================================================================
+
 #==============================================================================
 #FUNCTION TO REDUCE GUESSING CHANCES IF WRONG GUESS IS A VOWEL OR CONSONANT          
 #==============================================================================
-
+ 
 def reduce_guess(users_guess, num_of_guesses_left):
     
     if users_guess in "aeiou":
@@ -221,6 +244,7 @@ def reduce_guess(users_guess, num_of_guesses_left):
         num_of_guesses_left -= 1
         
     return num_of_guesses_left
+
 #==============================================================================
     
 def hangman(secret_word):
@@ -275,7 +299,7 @@ def hangman(secret_word):
     while num_of_guesses_left >= 0:
     
         #Take in the user's guess with the user_input_requirement function
-        users_guess = user_input_requirements()
+        (users_guess, warning) = user_input_requirements()
         
         letters_guessed.append(users_guess)
         
@@ -290,6 +314,8 @@ def hangman(secret_word):
             #guess_non_repeat(users_guess, letters_guessed)
             
             print("You have", str(num_of_guesses_left), "guesses left")
+            
+            print("Warning:", str(warning))
             
             print(letters_guessed)
             
@@ -320,6 +346,8 @@ def hangman(secret_word):
             print(letters_guessed)
             
             num_of_guesses_left = reduce_guess(users_guess, num_of_guesses_left)
+            
+            print("Warning:", str(warning))
             
             print("Available Letters:", get_available_letters(letters_guessed))
             
