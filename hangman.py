@@ -181,6 +181,8 @@ def user_input_requirements():
            
             warning -= 1
             
+            print("Warning:", str(warning))
+            
         elif users_guess == "":
             
             print("You must guess an alphabet")
@@ -188,6 +190,8 @@ def user_input_requirements():
             print("You have just lost a warning")
             
             warning -= 1
+            
+            print("Warning:", str(warning))
             
             
            
@@ -389,7 +393,24 @@ def hangman(secret_word):
 
 
 # -----------------------------------
+                
+#==============================================================================
+#FUNCTION TO STRIP OFF THE SPACES IN THE GUESSED WORD         
+#==============================================================================
 
+def strip_spaces(word):
+    
+    stripped_word = ""
+    
+    for letter in word:
+        
+        new_letter = letter.strip()
+        
+        stripped_word = stripped_word + new_letter
+    
+    return stripped_word
+
+#==============================================================================
 
 
 def match_with_gaps(my_word, other_word):
@@ -402,7 +423,36 @@ def match_with_gaps(my_word, other_word):
         False otherwise: 
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+     #Call the function that strips off spaces from the guessed word
+    stripped_my_word = strip_spaces(my_word)
+    
+    #If the lenght of the other_word isn't equal to the stripped word, 
+    #the words cannot be same
+    if len(stripped_my_word) != len(other_word):
+        
+        return False
+    
+    else:
+        
+        #Set the counter to count how many indexed letters in the stripped 
+        #my_word are equal to those in other_word
+        counter = 0
+        
+        for i, letter in enumerate(stripped_my_word):
+            
+            if letter == "_":
+                
+                pass
+            
+            else:
+                
+                if other_word.index(letter) == i:
+                    
+                    counter += 1
+                    
+    if counter == len(set(stripped_my_word)) - 1:
+        
+        return True
 
 
 
