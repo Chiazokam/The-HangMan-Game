@@ -467,7 +467,52 @@ def show_possible_matches(my_word):
 
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    stripped_my_word = strip_spaces(my_word)
+     
+    index_list = []
+     
+    letter_list = []
+     
+    for index, letter in enumerate(stripped_my_word):
+        print(stripped_my_word)
+        
+        if letter == "_":
+             
+            pass
+         
+        else:
+                     
+            index_list.append(index)
+             
+            letter_list.append(letter)
+            
+    print(index_list, letter_list)        
+
+    for word in wordlist:
+        
+        if len(word) == len(stripped_my_word):
+            
+            word_to_list = list(word)
+            
+            #Loop thru the index list and append all the letters in
+            #word_to_list to a new list
+            word_letter_list = []
+            
+            for i in index_list:
+                
+                word_letter_list.append(word_to_list[i])
+                
+            #print(word_letter_list)
+                
+             #Compare the letter_list from stripped_my_word and 
+             #the word_letter_list from the word from wordlist    
+            if ((letter_list > word_letter_list) - (letter_list < word_letter_list)) == 0:
+                
+                print(word)
+                
+            #else:
+                
+                #print("No matches found!")
 
 
 
