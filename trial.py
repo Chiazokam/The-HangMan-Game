@@ -169,7 +169,7 @@ def capture_word():
 
 my_word = "h_ li_ opt_ _ "
 
-my_word = "t_ _ t"
+my_word = "app_ _"
  
 #my_word = "t_ _tl_ "
                    
